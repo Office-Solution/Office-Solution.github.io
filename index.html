@@ -1,5 +1,6 @@
 <html>
-<head><link rel="icon" type="image/png" href="https://i.pinimg.com/originals/8c/b9/1c/8cb91c841b622340f5da888758a0fdfd.jpg">
+<head>
+<link rel="icon" type="image/png" href="https://i.pinimg.com/originals/8c/b9/1c/8cb91c841b622340f5da888758a0fdfd.jpg">
 	<title>Officesolution.com</title>
 <style>
 		h1{background-color: deepskyblue;}
@@ -45,13 +46,26 @@
   transition-duration: 0.1s;
   cursor: pointer;
 }
+.button2 {
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 27px;
+  margin: 4px 2px;
+  transition-duration: 0.1s;
+  cursor: pointer;
+}
+.button3 {background-color: white
+  border: Indigo;}
 a:link {
   color: white;
   background-color: transparent;
   text-decoration: none;
 }
 a:hover {
-  color: white;
   background-color: transparent;
   text-decoration: none;
 }
@@ -78,6 +92,71 @@ a:hover {
   background-color: #04AA6D;
   color: white;
 }
+* {
+  box-sizing: border-box;
+}
+.heading {
+  font-size: 25px;
+  margin-right: 25px;
+}
+
+.fa {
+  font-size: 25px;
+}
+
+.checked {
+  color: orange;
+}
+
+/* Three column layout */
+.side {
+  float: left;
+  width: 15%;
+  margin-top:10px;
+}
+
+.middle {
+  margin-top:10px;
+  float: left;
+  width: 70%;
+}
+
+/* Place text to the right */
+.right {
+  text-align: right;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* The bar container */
+.bar-container {
+  width: 100%;
+  background-color: #f1f1f1;
+  text-align: center;
+  color: white;
+}
+
+/* Individual bars */
+.bar-5 {width: 60%; height: 18px; background-color: #04AA6D;}
+.bar-4 {width: 4%; height: 18px; background-color: #2196F3;}
+.bar-3 {width: 0.5%; height: 18px; background-color: #00bcd4;}
+.bar-2 {width: 4%; height: 18px; background-color: #ff9800;}
+.bar-1 {width: 0.5%; height: 18px; background-color: #f44336;}
+
+/* Responsive layout - make the columns stack on top of each other instead of next to each other */
+@media (max-width: 400px) {
+  .side, .middle {
+    width: 100%;
+  }
+  .right {
+    display: none;
+  }
+}
 </style>
 </head>
 <body>
@@ -89,9 +168,8 @@ a:hover {
   <a href="#DIRECTIONS">DIRECTIONS</a>
   <a href="#CONTACT">CONTACT</a>
   <a href="#BUSINESS HOURS">BUSINESS HOURS</a>
-</div>
-    
-    
+  <a href="#Ratings">RATINGS</a>
+</div> 
 	<h2>Hello! This is the firm which deals in the distribution of:-</h2>
 	<div class="aligned">
 	   <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTKyZVZXDptyEIyERfKaNtQOPtjS1ITITJi1Q&usqp=CAU" alt="trophies" width="400" height="400">
@@ -151,8 +229,79 @@ a:hover {
            <tr><td>Fri:	10:30am – 8:00 PM</td></tr>
            <tr><td>Sat:	10:30am – 8:00 PM</td></tr>
            <tr><td>Sun:	Closed</td></tr>
-         </table>  
+         </table>
       </div>
     </div>
+</div><br><br>
+<hr color=" darkblue" style="width: 20%; text-align: center;"><br>
+<div class="grid-container">
+<span class="heading" style="color: darkblue;"><b>User Rating</b></span><br>
+<a href="https://www.google.com/search?q=office+solutions+kapoorthala&biw=1366&bih=657&ei=gLOhY5GhGrnaz7sP9cuhyAU&ved=0ahUKEwiR4enpoYj8AhU57XMBHfVlCFkQ4dUDCA8&uact=5&oq=office+solutions+kapoorthala&gs_lcp=Cgxnd3Mtd2l6LXNlcnAQAzIHCCEQoAEQCjIHCCEQoAEQCjoKCAAQRxDWBBCwAzoHCAAQsAMQQzoSCC4QxwEQ0QMQyAMQsAMQQxgBOhIILhDHARCvARDIAxCwAxBDGAE6BQgAEIAEOgsILhCABBDHARCvAToNCC4QgAQQxwEQrwEQCjoHCAAQgAQQCjoHCAAQgAQQDToGCAAQHhANOgYIABAWEB46CAgAEB4QDxANOggIABAWEB4QDzoICCEQFhAeEB06BQghEKABSgQIQRgASgQIRhgBUIcGWIkaYO0aaAFwAXgAgAG4AYgB8AySAQQwLjEwmAEAoAEByAERwAEB2gEGCAEQARgI&sclient=gws-wiz-serp#lrd=0x39995746c1f9b9bb:0x406be96fe227ec3d,1,,," class=""><img src="rating.jpeg" height="80" width="500"></a>
+<br>
+<div id="Ratings">
+  <button type="button"><a href="https://www.google.com/search?q=office+solutions+kapoorthala&biw=1366&bih=657&ei=gLOhY5GhGrnaz7sP9cuhyAU&ved=0ahUKEwiR4enpoYj8AhU57XMBHfVlCFkQ4dUDCA8&uact=5&oq=office+solutions+kapoorthala&gs_lcp=Cgxnd3Mtd2l6LXNlcnAQAzIHCCEQoAEQCjIHCCEQoAEQCjoKCAAQRxDWBBCwAzoHCAAQsAMQQzoSCC4QxwEQ0QMQyAMQsAMQQxgBOhIILhDHARCvARDIAxCwAxBDGAE6BQgAEIAEOgsILhCABBDHARCvAToNCC4QgAQQxwEQrwEQCjoHCAAQgAQQCjoHCAAQgAQQDToGCAAQHhANOgYIABAWEB46CAgAEB4QDxANOggIABAWEB4QDzoICCEQFhAeEB06BQghEKABSgQIQRgASgQIRhgBUIcGWIkaYO0aaAFwAXgAgAG4AYgB8AySAQQwLjEwmAEAoAEByAERwAEB2gEGCAEQARgI&sclient=gws-wiz-serp#lrd=0x39995746c1f9b9bb:0x406be96fe227ec3d,1,,," class="">Click here to rate us.</a></button>
+</div><br>
+<p>4.8 average based on 26 reviews.</p>
+<hr style="border:3px solid #f1f1f1">
+
+<div class="row">
+  <div class="side">
+    <div>5 star</div>
+  </div>
+  <div class="middle">
+    <div class="bar-container">
+      <div class="bar-5"></div>
+    </div>
+  </div>
+  <div class="side right">
+    <div>24</div>
+  </div>
+  <div class="side">
+    <div>4 star</div>
+  </div>
+  <div class="middle">
+    <div class="bar-container">
+      <div class="bar-4"></div>
+    </div>
+  </div>
+  <div class="side right">
+    <div>1</div>
+  </div>
+  <div class="side">
+    <div>3 star</div>
+  </div>
+  <div class="middle">
+    <div class="bar-container">
+      <div class="bar-3"></div>
+    </div>
+  </div>
+  <div class="side right">
+    <div>0</div>
+  </div>
+  <div class="side">
+    <div>2 star</div>
+  </div>
+  <div class="middle">
+    <div class="bar-container">
+      <div class="bar-2"></div>
+    </div>
+  </div>
+  <div class="side right">
+    <div>1</div>
+  </div>
+  <div class="side">
+    <div>1 star</div>
+  </div>
+  <div class="middle">
+    <div class="bar-container">
+      <div class="bar-1"></div>
+    </div>
+  </div>
+  <div class="side right">
+    <div>0</div>
+  </div>
+</div>
+<br><br>
+</div>
 </body>
 </html>
