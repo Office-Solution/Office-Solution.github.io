@@ -1,5 +1,6 @@
-h1{font-size: 50px;}
-  .whatsapp_float{
+h1{font-size: 50px;
+    margin-top: 0px;}
+	.whatsapp_float{
         position: fixed;
         bottom: 55px;
         right: 20px;
@@ -65,8 +66,6 @@ h1{font-size: 50px;}
       .topnav {
         overflow: hidden;
         background-color: #333;
-        position: sticky;
-        top: 0px;
       }
 
       .topnav a {
@@ -87,29 +86,11 @@ h1{font-size: 50px;}
         background-color: #04AA6D;
         color: white;
       }
-      * {
-  box-sizing: border-box;
-}
-
-.column {
-  /*float: left;*/
-  flex: 33%;
-  padding: 5px;
-}
-.column1{
-  float: right;
-  width: 33.33%
-  padding: 5px;
-}
-
-/* Clearfix (clear floats) */
-.row{
-  display: flex;
-}
-.head{
-        font-family: Lucida Handwriting;
-      }
-.hh {
+      .container {
+        display: flex;
+    align-items: left; }
+    span{padding: 50px;}
+    .hh {
         color: red;
         position: relative;
         animation-name: example;
@@ -131,63 +112,3 @@ h1{font-size: 50px;}
       99%{color:white; left:0px; top:0px;}
       100%{color:white; left:0px; top:0px; transition-delay: 5s;}
       }
-.navbar {
-  overflow: hidden;
-  background-color: #333;
-}
-
-.navbar a {
-  float: left;
-  font-size: 16px;
-  color: white;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-}
-
-.dropdown {
-  float: left;
-  overflow: hidden;
-}
-
-.dropdown .dropbtn {
-  font-size: 16px;  
-  border: none;
-  outline: none;
-  color: white;
-  padding: 14px 16px;
-  background-color: inherit;
-  font-family: inherit;
-  margin: 0;
-}
-
-.navbar a:hover, .dropdown:hover .dropbtn {
-  background-color: #ddd;
-  color: black;
-}
-
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f9f9f9;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
-}
-
-.dropdown-content a {
-  float: none;
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-  text-align: left;
-}
-
-.dropdown-content a:hover {
-  background-color: #ddd;
-}
-
-.dropdown:hover .dropdown-content {
-  display: block;
-}
