@@ -295,6 +295,52 @@
   max-width: 100%;
   max-height:100%;
 }
+.dropdown1 {
+  float: left;
+  overflow: hidden;
+}
+
+.dropdown1 .dropbtn1 {
+  font-size: 16px;  
+  border: none;
+  outline: none;
+  color: black;
+  padding: 14px 16px;
+  background-color: inherit;
+  font-family: inherit;
+  margin: 0;
+}
+
+.navbar1 a:hover, .dropdown1:hover .dropbtn1 {
+  background-color: #ddd;
+  color: black;
+}
+
+.dropdown-content1 {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content1 a {
+  float: none;
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+.dropdown-content1 a:hover {
+  background-color: #ddd;
+}
+
+.dropdown1:hover .dropdown-content1 {
+  display: block;
+}
 </style>
 </head>
 <body>
@@ -327,9 +373,36 @@
       <i class="fa fa-caret-down"></i>
     </button>
     <div class="dropdown-content">
+      <!-- <a href="https://office-solution.github.io/picture.html">All Prices</a> -->
+      <div class="dropdown1">
+    <button class="dropbtn1">TROPHIES 
+    </button>
+   <div class="dropdown-content1">
+      <a href="trophies.html">All Prices</a>
+      <!-- <a href="trophies1.html">Price: Low to High</a> -->
+      <!-- <a href="trophies2.html">Price: High to Low</a> -->
+    </div>
+  </div> 
+      <!-- <a href="low_to_high.html">Price: Low to High</a> -->
+      <div class="dropdown1">
+    <button class="dropbtn1">GIFTS
+    </button>
+    <div class="dropdown-content1">
+      <a href="gifts.html">All Prices</a>
+      <!-- <a href="low_to_high.html">Price: Low to High</a> -->
+      <!-- <a href="high_to_low.html">Price: High to Low</a> -->
+    </div>
+  </div> 
+      <!-- <a href="high_to_low.html">Price: High to Low</a> -->
+      <div class="dropdown1">
+    <button class="dropbtn1">MEMENTOES
+    </button>
+    <div class="dropdown-content1">
       <a href="https://office-solution.github.io/picture.html">All Prices</a>
       <a href="low_to_high.html">Price: Low to High</a>
       <a href="high_to_low.html">Price: High to Low</a>
+    </div>
+  </div> 
     </div>
   </div> 
 </div>
