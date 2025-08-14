@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gift Gallery - Office Solution</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Fallback font stack */
+        * {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+        }
+        
+        .gallery-hero {
+            padding: 120px 0 80px;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            text-align: center;
+        }
+        
+        .gallery-hero h1 {
+            font-size: 3rem;
+            color: white;
+            margin-bottom: 1rem;
+        }
+        
+        .gallery-hero p {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.9);
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+        
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 12px 24px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .back-button:hover {
+            background: white;
+            color: #f5576c;
+        }
+        
+        .gallery-section {
+            padding: 80px 0;
+            background: #fff;
+        }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+        
+        .gallery-item {
+            background: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .gallery-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: contain;
+            object-position: center;
+            background: #f8f9fa;
+            display: block;
+            padding: 10px;
+            box-sizing: border-box;
+            transition: transform 0.3s ease;
+        }
+        
+        .gallery-item-info {
+            padding: 1.5rem;
+        }
+        
+        .gallery-item h3 {
+            color: #333;
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+        
+        .gallery-item p {
+            color: #666;
+            font-size: 0.9rem;
+            margin: 0;
+        }
+        
+        .contact-cta {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+            margin-top: 4rem;
+        }
+        
+        .contact-cta h2 {
+            color: white;
+            margin-bottom: 1rem;
+        }
+        
+        .contact-cta p {
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 2rem;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .cta-btn {
+            padding: 12px 24px;
+            border: 2px solid white;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .cta-btn:hover {
+            background: white;
+            color: #f5576c;
+        }
+        
+        @media (max-width: 768px) {
+            .gallery-hero h1 {
+                font-size: 2rem;
+            }
+            
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <h1>Office Solution</h1>
+                    <p>Premium Corporate Gifts</p>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="index.html#products" class="nav-link">Products</a></li>
+                    <li><a href="index.html#about" class="nav-link">About</a></li>
+                    <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+                </ul>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Gallery Hero -->
+    <section class="gallery-hero">
+        <div class="container">
+            <h1>Gift Gallery</h1>
+            <p>Discover our beautiful collection of gifts perfect for birthdays, anniversaries, corporate events, and all special occasions. Each piece is carefully selected to create memorable moments.</p>
+            <a href="index.html#products" class="back-button">← Back to Products</a>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery-section">
+        <div class="container">
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="resources/images/gifts/G-01.JPG" alt="Premium Gift G-01" loading="lazy">
+                    <div class="gallery-item-info">
+                        <h3>Premium Gift Set G-01</h3>
+                        <p>Elegant gift set perfect for corporate occasions</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="resources/images/gifts/G-02.JPG" alt="Premium Gift G-02" loading="lazy">
+                    <div class="gallery-item-info">
+                        <h3>Premium Gift Set G-02</h3>
+                        <p>Beautiful presentation for special events</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="resources/images/gifts/G-03.JPG" alt="Premium Gift G-03" loading="lazy">
+                    <div class="gallery-item-info">
+                        <h3>Premium Gift Set G-03</h3>
+                        <p>Luxury gift collection for VIP clients</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="resources/images/gifts/G-04.JPG" alt="Premium Gift G-04" loading="lazy">
+                    <div class="gallery-item-info">
+                        <h3>Premium Gift Set G-04</h3>
+                        <p>Thoughtfully curated gift package</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="resources/images/gifts/G-05.JPG" alt="Premium Gift G-05" loading="lazy">
+                    <div class="gallery-item-info">
+                        <h3>Premium Gift Set G-05</h3>
+                        <p>Perfect for festive celebrations</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="resources/images/gifts/G-06.JPG" alt="Premium Gift G-06" loading="lazy">
+                    <div class="gallery-item-info">
+                        <h3>Premium Gift Set G-06</h3>
+                        <p>Exclusive gift collection for special moments</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="resources/images/gifts/G-07.JPG" alt="Premium Gift G-07" loading="lazy">
+                    <div class="gallery-item-info">
+                        <h3>Premium Gift Set G-07</h3>
+                        <p>Sophisticated gifts for business partners</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="resources/images/gifts/G-08.jpg" alt="Premium Gift G-08" loading="lazy">
+                    <div class="gallery-item-info">
+                        <h3>Premium Gift Set G-08</h3>
+                        <p>Unique collection for memorable occasions</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="resources/images/gifts/G-09.jpg" alt="Premium Gift G-09" loading="lazy">
+                    <div class="gallery-item-info">
+                        <h3>Premium Gift Set G-09</h3>
+                        <p>Elegant gifts for anniversary celebrations</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="resources/images/gifts/G-010.jpg" alt="Premium Gift G-010" loading="lazy">
+                    <div class="gallery-item-info">
+                        <h3>Premium Gift Set G-010</h3>
+                        <p>Beautiful gift options for birthdays</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="resources/images/gifts/G-011.jpg" alt="Premium Gift G-011" loading="lazy">
+                    <div class="gallery-item-info">
+                        <h3>Premium Gift Set G-011</h3>
+                        <p>Corporate gift solutions for conferences</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="resources/images/gifts/G-012.jpg" alt="Premium Gift G-012" loading="lazy">
+                    <div class="gallery-item-info">
+                        <h3>Premium Gift Set G-012</h3>
+                        <p>Premium collection for important milestones</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="resources/images/gifts/G-013.jpg" alt="Premium Gift G-013" loading="lazy">
+                    <div class="gallery-item-info">
+                        <h3>Premium Gift Set G-013</h3>
+                        <p>Exclusive gifts for recognition programs</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="resources/images/gifts/G-014.jpg" alt="Premium Gift G-014" loading="lazy">
+                    <div class="gallery-item-info">
+                        <h3>Premium Gift Set G-014</h3>
+                        <p>Handpicked gifts for special relationships</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact CTA -->
+    <section class="contact-cta">
+        <div class="container">
+            <h2>Find the Perfect Gift</h2>
+            <p>Let us help you choose the ideal gift for your special occasion. Custom packaging and bulk orders available.</p>
+            <div class="cta-buttons">
+                <a href="tel:+919839130098" class="cta-btn">📞 Call Now</a>
+                <a href="https://wa.me/919839130098?text=Hi, I'm interested in gifts from your gallery" class="cta-btn" target="_blank">💬 WhatsApp</a>
+                <a href="index.html#contact" class="cta-btn">🏪 Visit Store</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Office Solution</h3>
+                    <p>Your trusted partner for premium corporate gifts, trophies, and office supplies in Lucknow.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="trophies.html">Trophies</a></li>
+                        <li><a href="gifts.html">Gifts</a></li>
+                        <li><a href="index.html#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact Info</h4>
+                    <ul>
+                        <li><span style="color: #667eea; margin-right: 0.5rem;">📞</span> +91 98391 30098</li>
+                        <li><span style="color: #667eea; margin-right: 0.5rem;">📍</span> Lucknow - 226024</li>
+                        <li><span style="color: #667eea; margin-right: 0.5rem;">🕒</span> Mon-Sat: 10:30 AM - 8:00 PM</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Office Solution. All rights reserved. | Premium Corporate Gifts & Trophies in Lucknow</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

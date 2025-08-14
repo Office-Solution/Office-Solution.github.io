@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trophy Gallery - Office Solution</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Fallback font stack */
+        * {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+        }
+        
+        .gallery-hero {
+            padding: 120px 0 80px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            text-align: center;
+        }
+        
+        .gallery-hero h1 {
+            font-size: 3rem;
+            color: #333;
+            margin-bottom: 1rem;
+        }
+        
+        .gallery-hero p {
+            font-size: 1.2rem;
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+        
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 12px 24px;
+            background: #667eea;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .back-button:hover {
+            background: #5a6fd8;
+            transform: translateY(-2px);
+        }
+        
+        .gallery-section {
+            padding: 80px 0;
+            background: #fff;
+        }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .gallery-item {
+            background: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .gallery-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: contain;
+            object-position: center;
+            background: #f8f9fa;
+            display: block;
+            padding: 10px;
+            box-sizing: border-box;
+            transition: transform 0.3s ease;
+        }
+        
+        .gallery-item-info {
+            padding: 1.5rem;
+        }
+        
+        .gallery-item h3 {
+            color: #333;
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+        
+        .gallery-item p {
+            color: #666;
+            font-size: 0.9rem;
+            margin: 0;
+        }
+        
+        .category-title {
+            text-align: center;
+            margin: 4rem 0 2rem;
+            font-size: 2rem;
+            color: #333;
+        }
+        
+        .category-title:first-of-type {
+            margin-top: 0;
+        }
+        
+        .contact-cta {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+            margin-top: 4rem;
+        }
+        
+        .contact-cta h2 {
+            color: white;
+            margin-bottom: 1rem;
+        }
+        
+        .contact-cta p {
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 2rem;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .cta-btn {
+            padding: 12px 24px;
+            border: 2px solid white;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .cta-btn:hover {
+            background: white;
+            color: #667eea;
+        }
+        
+        @media (max-width: 768px) {
+            .gallery-hero h1 {
+                font-size: 2rem;
+            }
+            
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <h1>Office Solution</h1>
+                    <p>Premium Corporate Gifts</p>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="index.html#products" class="nav-link">Products</a></li>
+                    <li><a href="index.html#about" class="nav-link">About</a></li>
+                    <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+                </ul>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Gallery Hero -->
+    <section class="gallery-hero">
+        <div class="container">
+            <h1>Trophy Gallery</h1>
+            <p>Explore our extensive collection of premium trophies and medals. From elegant wooden designs to stunning crystal pieces, we have the perfect trophy for every achievement.</p>
+            <a href="index.html#products" class="back-button">← Back to Products</a>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery-section">
+        <div class="container">
+            <!-- Traditional Trophies -->
+            <h2 class="category-title">Traditional Trophies</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="resources/images/trophies/T-01.jpg" alt="Traditional Trophy T-01" loading="lazy">
+                    <div class="gallery-item-info">
+                        <h3>Traditional Trophy T-01</h3>
+                        <p>Classic design with elegant finishing</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="resources/images/trophies/T-02.JPG" alt="Traditional Trophy T-02" loading="lazy">
+                    <div class="gallery-item-info">
+                        <h3>Traditional Trophy T-02</h3>
+                        <p>Premium quality with gold accents</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="resources/images/trophies/T-03.JPG" alt="Traditional Trophy T-03" loading="lazy">
+                    <div class="gallery-item-info">
+                        <h3>Traditional Trophy T-03</h3>
+                        <p>Perfect for sports achievements</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="resources/images/trophies/T-04.JPG" alt="Traditional Trophy T-04" loading="lazy">
+                    <div class="gallery-item-info">
+                        <h3>Traditional Trophy T-04</h3>
+                        <p>Ideal for corporate recognition</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="resources/images/trophies/T-05.JPG" alt="Traditional Trophy T-05" loading="lazy">
+                    <div class="gallery-item-info">
+                        <h3>Traditional Trophy T-05</h3>
+                        <p>Beautiful design for special occasions</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="resources/images/trophies/T-06.JPG" alt="Traditional Trophy T-06" loading="lazy">
+                    <div class="gallery-item-info">
+                        <h3>Traditional Trophy T-06</h3>
+                        <p>Elegant styling with premium finish</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="resources/images/trophies/T-07.JPG" alt="Traditional Trophy T-07" loading="lazy">
+                    <div class="gallery-item-info">
+                        <h3>Traditional Trophy T-07</h3>
+                        <p>Classic trophy for achievements</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="resources/images/trophies/T-08.jpg" alt="Traditional Trophy T-08" loading="lazy">
+                    <div class="gallery-item-info">
+                        <h3>Traditional Trophy T-08</h3>
+                        <p>Professional design for awards</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Wooden Trophies -->
+            <h2 class="category-title">Wooden Trophies</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="resources/images/trophies/WT-01.JPG" alt="Wooden Trophy WT-01" loading="lazy">
+                    <div class="gallery-item-info">
+                        <h3>Wooden Trophy WT-01</h3>
+                        <p>Handcrafted wooden excellence</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="resources/images/trophies/WT-02.JPG" alt="Wooden Trophy WT-02" loading="lazy">
+                    <div class="gallery-item-info">
+                        <h3>Wooden Trophy WT-02</h3>
+                        <p>Natural wood with premium finish</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="resources/images/trophies/WT-03.JPG" alt="Wooden Trophy WT-03" loading="lazy">
+                    <div class="gallery-item-info">
+                        <h3>Wooden Trophy WT-03</h3>
+                        <p>Eco-friendly and stylish design</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="resources/images/trophies/WT-04.JPG" alt="Wooden Trophy WT-04" loading="lazy">
+                    <div class="gallery-item-info">
+                        <h3>Wooden Trophy WT-04</h3>
+                        <p>Sophisticated wooden craftsmanship</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="resources/images/trophies/WT-05.jpeg" alt="Wooden Trophy WT-05" loading="lazy">
+                    <div class="gallery-item-info">
+                        <h3>Wooden Trophy WT-05</h3>
+                        <p>Unique grain pattern and finish</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="resources/images/trophies/WT-06.JPG" alt="Wooden Trophy WT-06" loading="lazy">
+                    <div class="gallery-item-info">
+                        <h3>Wooden Trophy WT-06</h3>
+                        <p>Premium wood construction</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="resources/images/trophies/WT-07.JPG" alt="Wooden Trophy WT-07" loading="lazy">
+                    <div class="gallery-item-info">
+                        <h3>Wooden Trophy WT-07</h3>
+                        <p>Elegant wooden trophy design</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Crystal Trophies -->
+            <h2 class="category-title">Crystal Trophies</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="resources/images/trophies/CT-10.JPG" alt="Crystal Trophy CT-10" loading="lazy">
+                    <div class="gallery-item-info">
+                        <h3>Crystal Trophy CT-10</h3>
+                        <p>Stunning crystal clarity and brilliance</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="resources/images/trophies/CT-02.JPG" alt="Crystal Trophy CT-02" loading="lazy">
+                    <div class="gallery-item-info">
+                        <h3>Crystal Trophy CT-02</h3>
+                        <p>Premium crystal with elegant design</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="resources/images/trophies/CT-03.JPG" alt="Crystal Trophy CT-03" loading="lazy">
+                    <div class="gallery-item-info">
+                        <h3>Crystal Trophy CT-03</h3>
+                        <p>Luxurious crystal award piece</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="resources/images/trophies/CT-04.JPG" alt="Crystal Trophy CT-04" loading="lazy">
+                    <div class="gallery-item-info">
+                        <h3>Crystal Trophy CT-04</h3>
+                        <p>Perfect for corporate recognition</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="resources/images/trophies/CT-05.JPG" alt="Crystal Trophy CT-05" loading="lazy">
+                    <div class="gallery-item-info">
+                        <h3>Crystal Trophy CT-05</h3>
+                        <p>Exceptional crystal craftsmanship</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="resources/images/trophies/CT-06.JPG" alt="Crystal Trophy CT-06" loading="lazy">
+                    <div class="gallery-item-info">
+                        <h3>Crystal Trophy CT-06</h3>
+                        <p>Beautiful crystal trophy design</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="resources/images/trophies/CT-07.JPG" alt="Crystal Trophy CT-07" loading="lazy">
+                    <div class="gallery-item-info">
+                        <h3>Crystal Trophy CT-07</h3>
+                        <p>High-quality crystal excellence</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="resources/images/trophies/CT-09.JPG" alt="Crystal Trophy CT-09" loading="lazy">
+                    <div class="gallery-item-info">
+                        <h3>Crystal Trophy CT-09</h3>
+                        <p>Sophisticated crystal award</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="resources/images/trophies/CT-11.JPG" alt="Crystal Trophy CT-11" loading="lazy">
+                    <div class="gallery-item-info">
+                        <h3>Crystal Trophy CT-11</h3>
+                        <p>Brilliant crystal trophy piece</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="resources/images/trophies/CT-12.JPG" alt="Crystal Trophy CT-12" loading="lazy">
+                    <div class="gallery-item-info">
+                        <h3>Crystal Trophy CT-12</h3>
+                        <p>Elegant crystal design</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="resources/images/trophies/CT-13.JPG" alt="Crystal Trophy CT-13" loading="lazy">
+                    <div class="gallery-item-info">
+                        <h3>Crystal Trophy CT-13</h3>
+                        <p>Premium crystal trophy</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact CTA -->
+    <section class="contact-cta">
+        <div class="container">
+            <h2>Interested in Our Trophies?</h2>
+            <p>Contact us today for custom designs, bulk orders, and competitive pricing</p>
+            <div class="cta-buttons">
+                <a href="tel:+919839130098" class="cta-btn">📞 Call Now</a>
+                <a href="https://wa.me/919839130098?text=Hi, I'm interested in trophies from your gallery" class="cta-btn" target="_blank">💬 WhatsApp</a>
+                <a href="index.html#contact" class="cta-btn">🏪 Visit Store</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Office Solution</h3>
+                    <p>Your trusted partner for premium corporate gifts, trophies, and office supplies in Lucknow.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="trophies.html">Trophies</a></li>
+                        <li><a href="gifts.html">Gifts</a></li>
+                        <li><a href="index.html#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact Info</h4>
+                    <ul>
+                        <li><span style="color: #667eea; margin-right: 0.5rem;">📞</span> +91 98391 30098</li>
+                        <li><span style="color: #667eea; margin-right: 0.5rem;">📍</span> Lucknow - 226024</li>
+                        <li><span style="color: #667eea; margin-right: 0.5rem;">🕒</span> Mon-Sat: 10:30 AM - 8:00 PM</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Office Solution. All rights reserved. | Premium Corporate Gifts & Trophies in Lucknow</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
