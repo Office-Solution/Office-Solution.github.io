@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Office Solution | Order Dashboard</title>
+    <style>
+        :root {
+            --primary: #667eea;
+            --secondary: #764ba2;
+            --text: #333;
+            --muted: #666;
+            --page: #f6f8fc;
+            --border: #e8eaf1
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background: var(--page);
+            min-height: 100vh
+        }
+
+        .dashboard-header {
+            padding: 28px 20px;
+            color: #fff;
+            text-align: center;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            box-shadow: 0 4px 20px rgba(0, 0, 0, .08)
+        }
+
+        .dashboard-header h1 {
+            font-size: clamp(1.6rem, 4vw, 2.2rem);
+            margin-bottom: 4px
+        }
+
+        .dashboard-header p {
+            color: rgba(255, 255, 255, .9);
+            margin: 0
+        }
+
+        .page-container {
+            width: min(1200px, 100%);
+            margin: 0 auto;
+            padding: 26px 20px 48px
+        }
+
+        .summary {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 16px;
+            margin-bottom: 26px
+        }
+
+        .summary-card {
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, .05)
+        }
+
+        .summary-card .label {
+            color: var(--muted);
+            font-size: .92rem;
+            font-weight: 600
+        }
+
+        .summary-card .count {
+            display: block;
+            margin-top: 6px;
+            font-size: 2rem;
+            line-height: 1.2;
+            font-weight: 750
+        }
+
+        .count.total {
+            color: var(--primary)
+        }
+
+        .count.pending {
+            color: #b7791f
+        }
+
+        .count.progress {
+            color: #2563eb
+        }
+
+        .count.completed {
+            color: #15803d
+        }
+
+        .toolbar {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px
+        }
+
+        .search {
+            flex: 1;
+            min-width: 0;
+            padding: 13px 15px;
+            border: 1px solid var(--border);
+            border-radius: 9px;
+            outline: none;
+            background: #fff;
+            color: var(--text);
+            font: inherit
+        }
+
+        .search:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, .13)
+        }
+
+        .refresh-btn {
+            border: 0;
+            border-radius: 9px;
+            padding: 13px 16px;
+            color: #fff;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            font: inherit;
+            font-weight: 600;
+            cursor: pointer;
+            white-space: nowrap
+        }
+
+        .refresh-btn:disabled {
+            opacity: .65;
+            cursor: wait
+        }
+
+        .filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 9px;
+            margin-bottom: 20px
+        }
+
+        .filter-btn {
+            border: 1px solid var(--border);
+            border-radius: 9px;
+            padding: 9px 15px;
+            background: #fff;
+            color: #4b5563;
+            font: inherit;
+            font-size: .92rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: .2s ease
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            color: #fff;
+            background: var(--primary);
+            border-color: var(--primary)
+        }
+
+        .results-line {
+            color: var(--muted);
+            font-size: .9rem;
+            margin-bottom: 12px
+        }
+
+        .orders {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 16px
+        }
+
+        .order-card {
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, .045);
+            min-width: 0
+        }
+
+        .order-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 10px;
+            margin-bottom: 13px
+        }
+
+        .order-id {
+            color: var(--primary);
+            font-size: .92rem;
+            font-weight: 750;
+            overflow-wrap: anywhere
+        }
+
+        .buyer {
+            font-size: 1.12rem;
+            font-weight: 700;
+            line-height: 1.35;
+            margin-bottom: 9px;
+            overflow-wrap: anywhere
+        }
+
+        .description {
+            color: var(--muted);
+            margin-bottom: 15px;
+            overflow-wrap: anywhere
+        }
+
+        .details {
+            display: grid;
+            gap: 8px;
+            padding-top: 13px;
+            border-top: 1px solid #eef0f5
+        }
+
+        .detail {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            font-size: .93rem
+        }
+
+        .detail span:first-child {
+            color: var(--muted)
+        }
+
+        .detail span:last-child {
+            text-align: right;
+            font-weight: 600;
+            overflow-wrap: anywhere
+        }
+
+        .status {
+            display: inline-flex;
+            align-items: center;
+            border-radius: 20px;
+            padding: 5px 10px;
+            font-size: .78rem;
+            line-height: 1.4;
+            font-weight: 700;
+            white-space: nowrap
+        }
+
+        .status.pending {
+            background: #fff3cd;
+            color: #856404
+        }
+
+        .status.progress {
+            background: #dbeafe;
+            color: #1d4ed8
+        }
+
+        .status.completed {
+            background: #d4edda;
+            color: #155724
+        }
+
+        .message {
+            grid-column: 1/-1;
+            padding: 36px 20px;
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            color: var(--muted);
+            text-align: center
+        }
+
+        .footer-note {
+            color: #888;
+            text-align: center;
+            font-size: .82rem;
+            margin-top: 24px
+        }
+
+        @media(max-width:900px) {
+            .summary {
+                grid-template-columns: repeat(2, minmax(0, 1fr))
+            }
+
+            .orders {
+                grid-template-columns: repeat(2, minmax(0, 1fr))
+            }
+        }
+
+        @media(max-width:600px) {
+            .page-container {
+                padding: 20px 14px 36px
+            }
+
+            .summary {
+                gap: 10px
+            }
+
+            .summary-card {
+                padding: 15px
+            }
+
+            .summary-card .count {
+                font-size: 1.7rem
+            }
+
+            .toolbar {
+                align-items: stretch
+            }
+
+            .refresh-btn {
+                padding: 12px
+            }
+
+            .orders {
+                grid-template-columns: 1fr
+            }
+
+            .filter-btn {
+                flex: 1 1 calc(50% - 9px)
+            }
+        }
+
+        /* Common neon status dot */
+        .neon-dot {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            margin-right: 7px;
+            border-radius: 50%;
+            vertical-align: middle;
+            animation: neonBlink 1.2s infinite ease-in-out;
+        }
+
+        /* Blue — In Progress */
+        .dot-blue {
+            background: #00aaff;
+            box-shadow: 0 0 5px #00aaff, 0 0 10px #00aaff, 0 0 18px #0088ff;
+        }
+
+        /* Green — Completed */
+        .dot-green {
+            background: #00ff75;
+            box-shadow: 0 0 5px #00ff75, 0 0 10px #00ff75, 0 0 18px #00cc55;
+        }
+
+        /* Red — Yet To Start */
+        .dot-red {
+            background: #ff3030;
+            box-shadow: 0 0 5px #ff3030, 0 0 10px #ff3030, 0 0 18px #ff0000;
+        }
+
+        /* Blinking neon animation */
+        @keyframes neonBlink {
+
+            0%,
+            100% {
+                opacity: 1;
+                filter: brightness(1.2);
+            }
+
+            50% {
+                opacity: 0.3;
+                filter: brightness(0.7);
+            }
+        }
+
+        #loginScreen {
+            position: fixed;
+            inset: 0;
+            z-index: 99999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background: #f3f4f6;
+        }
+
+        .login-box {
+            width: 100%;
+            max-width: 380px;
+            padding: 32px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 10px 35px rgba(0, 0, 0, 0.12);
+        }
+
+        .login-box h1 {
+            margin: 0 0 8px;
+            text-align: center;
+        }
+
+        .login-box>p {
+            text-align: center;
+            color: #6b7280;
+        }
+
+        .login-box label {
+            display: block;
+            margin: 24px 0 8px;
+            font-weight: 600;
+        }
+
+        .login-box input {
+            box-sizing: border-box;
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+
+        .login-box button {
+            width: 100%;
+            margin-top: 16px;
+            padding: 12px;
+            border: 0;
+            border-radius: 8px;
+            background: #4338ca;
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        #loginError {
+            color: #dc2626;
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="loginScreen">
+        <form id="loginForm" class="login-box">
+            <h1>Office Solution</h1>
+            <p>Order Dashboard Login</p>
+
+            <label for="dashboardPassword">Enter Password</label>
+            <input type="password" id="dashboardPassword" placeholder="Enter your password" required
+                autocomplete="current-password">
+
+            <button type="submit">Login</button>
+            <p id="loginError" role="alert"></p>
+        </form>
+    </div>
+    <header class="dashboard-header">
+        <h1>Office Solution</h1>
+        <p>Order Dashboard</p>
+    </header>
+    <main class="page-container">
+        <section class="summary" aria-label="Order summary">
+            <div class="summary-card">
+                <div class="label">Total Orders</div><span class="count total" id="totalOrders">0</span>
+            </div>
+            <div class="summary-card">
+                <div class="label">Yet To Start</div><span class="count pending" id="pendingOrders">0</span>
+            </div>
+            <div class="summary-card">
+                <div class="label">In Progress</div><span class="count progress" id="progressOrders">0</span>
+            </div>
+            <div class="summary-card">
+                <div class="label">Completed</div><span class="count completed" id="completedOrders">0</span>
+            </div>
+        </section>
+        <section aria-label="Find and filter orders">
+            <div class="toolbar"><input class="search" id="searchInput" type="search"
+                    placeholder="Search by buyer, order ID, or description..." aria-label="Search orders"><button
+                    class="refresh-btn" id="refreshButton" type="button">↻ Refresh</button></div>
+            <div class="filters">
+                <button class="filter-btn active" type="button" data-status="all">All Orders</button>
+                <button class="filter-btn" type="button" data-status="Yet To Start">Yet To Start</button>
+                <button class="filter-btn" type="button" data-status="In Progress">In Progress</button>
+                <button class="filter-btn" type="button" data-status="Completed">Completed</button>
+            </div>
+        </section>
+        <div class="results-line" id="resultsLine">Loading orders...</div>
+        <section class="orders" id="ordersContainer" aria-live="polite">
+            <div class="message">Loading orders...</div>
+        </section>
+        <p class="footer-note" id="lastUpdated">Orders refresh automatically every minute.</p>
+    </main>
+
+    <script>
+        const DASHBOARD_PASSWORD = "Office@1868";
+
+        document.getElementById("loginForm").addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            const enteredPassword =
+                document.getElementById("dashboardPassword").value;
+
+            if (enteredPassword === DASHBOARD_PASSWORD) {
+                document.getElementById("loginScreen").style.display = "none";
+
+                // Start the existing dashboard only after login.
+                initializeDashboard();
+            } else {
+                document.getElementById("loginError").textContent =
+                    "Incorrect password. Please try again.";
+
+                document.getElementById("dashboardPassword").value = "";
+                document.getElementById("dashboardPassword").focus();
+            }
+        });
+        const API_URL = "https://script.google.com/macros/s/AKfycbzF3glPfNRlwi_MhbDjnJhNDHO2laf8sDGtjL3pHvvxMZLEiDXq_66RrTNxYbjCqrmMiw/exec";
+
+        let allOrders = [];
+        let currentFilter = "all";
+        let isLoading = false;
+
+        const $ = id => document.getElementById(id);
+
+        function safeText(value, fallback = "Not provided") {
+            const text = String(value ?? "").trim();
+            return text || fallback;
+        }
+
+        function getOrderId(order) {
+            return order["Order ID"]
+                ?? order["Order Id"]
+                ?? order["OrderID"]
+                ?? order["Order No"]
+                ?? order["Order Number"];
+        }
+
+        function normalizeStatus(status) {
+            const value = String(status ?? "").trim().toLowerCase();
+
+            if (value === "completed") return "Completed";
+            if (value === "in progress") return "In Progress";
+
+            return "Yet To Start";
+        }
+
+        function statusClass(status) {
+            return status === "Completed"
+                ? "completed"
+                : status === "In Progress"
+                    ? "progress"
+                    : "pending";
+        }
+
+        function formatRupees(value) {
+            if (
+                value === null ||
+                value === undefined ||
+                String(value).trim() === ""
+            ) {
+                return "Not provided";
+            }
+
+            const amount = Number(
+                String(value).replace(/[₹,\s]/g, "")
+            );
+
+            return Number.isFinite(amount)
+                ? "₹" + amount.toLocaleString("en-IN")
+                : safeText(value);
+        }
+
+        function formatDate(value) {
+            if (!value) return "Not provided";
+
+            // Avoid timezone conversion changing the date.
+            const match = String(value).match(/^(\d{4})-(\d{2})-(\d{2})/);
+
+            if (match) {
+                return `${match[3]}-${match[2]}-${match[1]}`;
+            }
+
+            return String(value);
+        }
+
+        function updateSummary() {
+            $("totalOrders").textContent = allOrders.length;
+
+            $("pendingOrders").textContent = allOrders.filter(
+                order => normalizeStatus(order.Status) === "Yet To Start"
+            ).length;
+
+            $("progressOrders").textContent = allOrders.filter(
+                order => normalizeStatus(order.Status) === "In Progress"
+            ).length;
+
+            $("completedOrders").textContent = allOrders.filter(
+                order => normalizeStatus(order.Status) === "Completed"
+            ).length;
+
+            // Calculate combined TOV across all orders.
+            const totalValue = allOrders.reduce((sum, order) => {
+                const rawValue = order["TOV(Total Order Value)"];
+
+                if (
+                    rawValue === null ||
+                    rawValue === undefined ||
+                    String(rawValue).trim() === ""
+                ) {
+                    return sum;
+                }
+
+                const value = Number(
+                    String(rawValue).replace(/[₹,\s]/g, "")
+                );
+
+                return sum + (Number.isFinite(value) ? value : 0);
+            }, 0);
+
+            // This element must exist in your HTML.
+            const totalBusinessValue = $("totalBusinessValue");
+
+            if (totalBusinessValue) {
+                totalBusinessValue.textContent =
+                    "₹" + totalValue.toLocaleString("en-IN");
+            }
+        }
+
+        function makeDetail(label, value) {
+            const row = document.createElement("div");
+            row.className = "detail";
+
+            const labelElement = document.createElement("span");
+            labelElement.textContent = label;
+
+            const valueElement = document.createElement("span");
+            valueElement.textContent = value;
+
+            row.append(labelElement, valueElement);
+
+            return row;
+        }
+
+        function makeOrderCard(order) {
+            const card = document.createElement("article");
+            card.className = "order-card";
+
+            const status = normalizeStatus(order.Status);
+
+            // Order header and ID.
+            const top = document.createElement("div");
+            top.className = "order-top";
+
+            const id = document.createElement("div");
+            id.className = "order-id";
+            id.textContent = safeText(
+                getOrderId(order),
+                "Order ID unavailable"
+            );
+
+            const badge = document.createElement("span");
+            badge.className = "status " + statusClass(status);
+
+            const dot = document.createElement("span");
+            dot.className = "neon-dot " +
+                (status === "In Progress" ? "dot-blue" :
+                    status === "Completed" ? "dot-green" : "dot-red");
+
+            badge.append(dot, document.createTextNode(" " + status));
+
+            top.append(id, badge);
+
+            // Buyer name.
+            const buyer = document.createElement("h2");
+            buyer.className = "buyer";
+            buyer.textContent = safeText(
+                order["Buyer's Name"],
+                "Buyer not provided"
+            );
+
+            // Order description.
+            const description = document.createElement("p");
+            description.className = "description";
+            description.textContent = safeText(
+                order["Order Description"],
+                "No description provided"
+            );
+
+            // Order details: quantity, rate, TOV and delivery date.
+            const details = document.createElement("div");
+            details.className = "details";
+
+            details.append(
+                makeDetail(
+                    "Quantity",
+                    safeText(order["Order Quantity"])
+                ),
+                makeDetail(
+                    "Rate",
+                    formatRupees(order["Rate"])
+                ),
+                makeDetail(
+                    "TOV (Total Order Value)",
+                    formatRupees(order["TOV(Total Order Value)"])
+                ),
+                makeDetail(
+                    "Delivery date",
+                    formatDate(order["Delivery Date"])
+                )
+            );
+
+            card.append(top, buyer, description, details);
+
+            return card;
+        }
+
+        function renderOrders() {
+            const container = $("ordersContainer");
+            const query = $("searchInput").value.trim().toLowerCase();
+
+            const filtered = allOrders.filter(order => {
+                const statusMatches =
+                    currentFilter === "all" ||
+                    normalizeStatus(order.Status) === currentFilter;
+
+                const searchable = [
+                    getOrderId(order),
+                    order["Buyer's Name"],
+                    order["Order Description"],
+                    order["Order Quantity"],
+                    order["Rate"],
+                    order["TOV"],
+                    order["Delivery Date"],
+                    order.Status
+                ]
+                    .map(value => String(value ?? ""))
+                    .join(" ")
+                    .toLowerCase();
+
+                return statusMatches && searchable.includes(query);
+            });
+
+            container.replaceChildren();
+
+            $("resultsLine").textContent =
+                filtered.length +
+                (filtered.length === 1 ? " order shown" : " orders shown");
+
+            if (!filtered.length) {
+                const empty = document.createElement("div");
+                empty.className = "message";
+
+                empty.textContent = allOrders.length
+                    ? "No orders match your search or selected filter."
+                    : "No orders found.";
+
+                container.appendChild(empty);
+                return;
+            }
+
+            filtered.forEach(order => {
+                container.appendChild(makeOrderCard(order));
+            });
+        }
+
+        async function loadOrders() {
+            if (isLoading) return;
+
+            isLoading = true;
+
+            $("refreshButton").disabled = true;
+            $("refreshButton").textContent = "Refreshing...";
+
+            try {
+                const response = await fetch(API_URL, {
+                    cache: "no-store"
+                });
+
+                if (!response.ok) {
+                    throw new Error("Request failed: " + response.status);
+                }
+
+                const data = await response.json();
+
+                if (!Array.isArray(data)) {
+                    throw new Error("The order API did not return a list.");
+                }
+
+                allOrders = data;
+
+                updateSummary();
+                renderOrders();
+
+                $("lastUpdated").textContent =
+                    "Last updated: " +
+                    new Date().toLocaleTimeString() +
+                    " · Automatically refreshes every minute.";
+
+            } catch (error) {
+                console.error("Unable to load orders:", error);
+
+                if (!allOrders.length) {
+                    $("ordersContainer").replaceChildren();
+
+                    const msg = document.createElement("div");
+                    msg.className = "message";
+                    msg.textContent =
+                        "Unable to load orders. Check your internet connection and Google Sheets API access, then refresh.";
+
+                    $("ordersContainer").appendChild(msg);
+                    $("resultsLine").textContent = "Orders could not be loaded";
+                }
+
+                $("lastUpdated").textContent =
+                    "Could not refresh orders. Previously loaded orders, if any, are still shown.";
+
+            } finally {
+                isLoading = false;
+                $("refreshButton").disabled = false;
+                $("refreshButton").textContent = "↻ Refresh";
+            }
+        }
+
+        // Search orders.
+        $("searchInput").addEventListener("input", renderOrders);
+
+        // Filter orders by status.
+        document.querySelectorAll(".filter-btn").forEach(button => {
+            button.addEventListener("click", () => {
+                document.querySelectorAll(".filter-btn").forEach(item => {
+                    item.classList.remove("active");
+                });
+
+                button.classList.add("active");
+                currentFilter = button.dataset.status;
+
+                renderOrders();
+            });
+        });
+
+        // Manual refresh.
+        $("refreshButton").addEventListener("click", loadOrders);
+
+        // Initial load and automatic refresh every minute.
+        function initializeDashboard() {
+            loadOrders();
+            setInterval(loadOrders, 60000);
+        }
+    </script>
+
+</body>
+
+</html>
