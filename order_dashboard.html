@@ -433,11 +433,77 @@
             color: #dc2626;
             font-size: 14px;
         }
+
+        .complete-btn {
+            margin-top: 16px;
+            padding: 10px 16px;
+            border: none;
+            border-radius: 8px;
+            background: #15803d;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .complete-btn:hover {
+            background: #166534;
+        }
+
+        .complete-btn:disabled {
+            opacity: 0.6;
+            cursor: wait;
+        }
+
+        .complete-btn {
+            display: block;
+            width: 100%;
+            margin-top: 16px;
+            padding: 11px 16px;
+            border: none;
+            border-radius: 8px;
+            background: #15803d;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+
+        .complete-btn:hover {
+            background: #166534;
+        }
+
+        .complete-btn:disabled {
+            opacity: 0.6;
+            cursor: wait;
+        }
+
+        .start-btn {
+            display: block;
+            width: 100%;
+            margin-top: 16px;
+            padding: 11px 16px;
+            border: none;
+            border-radius: 8px;
+            background: #2563eb;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+
+        .start-btn:hover {
+            background: #1d4ed8;
+        }
+
+        .start-btn:disabled {
+            opacity: 0.6;
+            cursor: wait;
+        }
     </style>
 </head>
 
 <body>
-    <div id="loginScreen">
+    <!-- <div id="loginScreen">
         <form id="loginForm" class="login-box">
             <h1>Office Solution</h1>
             <p>Order Dashboard Login</p>
@@ -449,7 +515,7 @@
             <button type="submit">Login</button>
             <p id="loginError" role="alert"></p>
         </form>
-    </div>
+    </div> -->
     <header class="dashboard-header">
         <h1>Office Solution</h1>
         <p>Order Dashboard</p>
@@ -488,28 +554,28 @@
     </main>
 
     <script>
-        const DASHBOARD_PASSWORD = "Office@1868";
+        // const DASHBOARD_PASSWORD = "Office@1868";
 
-        document.getElementById("loginForm").addEventListener("submit", function (event) {
-            event.preventDefault();
+        // document.getElementById("loginForm").addEventListener("submit", function (event) {
+        //     event.preventDefault();
 
-            const enteredPassword =
-                document.getElementById("dashboardPassword").value;
+        //     const enteredPassword =
+        //         document.getElementById("dashboardPassword").value;
 
-            if (enteredPassword === DASHBOARD_PASSWORD) {
-                document.getElementById("loginScreen").style.display = "none";
+        //     if (enteredPassword === DASHBOARD_PASSWORD) {
+        //         document.getElementById("loginScreen").style.display = "none";
 
-                // Start the existing dashboard only after login.
-                initializeDashboard();
-            } else {
-                document.getElementById("loginError").textContent =
-                    "Incorrect password. Please try again.";
+        //         // Start the existing dashboard only after login.
+        //         initializeDashboard();
+        //     } else {
+        //         document.getElementById("loginError").textContent =
+        //             "Incorrect password. Please try again.";
 
-                document.getElementById("dashboardPassword").value = "";
-                document.getElementById("dashboardPassword").focus();
-            }
-        });
-        const API_URL = "https://script.google.com/macros/s/AKfycbzF3glPfNRlwi_MhbDjnJhNDHO2laf8sDGtjL3pHvvxMZLEiDXq_66RrTNxYbjCqrmMiw/exec";
+        //         document.getElementById("dashboardPassword").value = "";
+        //         document.getElementById("dashboardPassword").focus();
+        //     }
+        // });
+        const API_URL = "https://script.google.com/macros/s/AKfycbw4hNIpaAVDYkVpuL3Y1riecG5008wfn4KOnAdDZezJUyjkhyBZQWJpHbQye22o579cBg/exec";
 
         let allOrders = [];
         let currentFilter = "all";
@@ -704,7 +770,43 @@
                 )
             );
 
-            card.append(top, buyer, description, details);
+
+            if (status === "Yet To Start") {
+                const startButton = document.createElement("button");
+                startButton.className = "start-btn";
+                startButton.textContent = "▶ Start Order";
+
+                startButton.addEventListener("click", () => {
+                    updateOrderStatus(
+                        getOrderId(order),
+                        "start",
+                        "In Progress",
+                        startButton
+                    );
+                });
+
+                card.append(top, buyer, description, details, startButton);
+
+            } else if (status === "In Progress") {
+                const completeButton = document.createElement("button");
+                completeButton.className = "complete-btn";
+                completeButton.textContent = "✓ Mark as Complete";
+
+                completeButton.addEventListener("click", () => {
+                    updateOrderStatus(
+                        getOrderId(order),
+                        "complete",
+                        "Completed",
+                        completeButton
+                    );
+                });
+
+                card.append(top, buyer, description, details, completeButton);
+
+            } else {
+                card.append(top, buyer, description, details);
+            }
+
 
             return card;
         }
@@ -757,6 +859,80 @@
                 container.appendChild(makeOrderCard(order));
             });
         }
+
+
+        async function updateOrderStatus(orderId, action, expectedStatus, button) {
+            if (!orderId) {
+                alert("This order has no valid Order ID.");
+                return;
+            }
+
+            const actionText = action === "start"
+                ? "start working on"
+                : "mark as completed";
+
+            if (!confirm(`Are you sure you want to ${actionText} this order?`)) {
+                return;
+            }
+
+            const originalText = button.textContent;
+
+            button.disabled = true;
+            button.textContent = "Updating...";
+
+            try {
+                await fetch(API_URL, {
+                    method: "POST",
+                    mode: "no-cors",
+                    headers: {
+                        "Content-Type": "text/plain;charset=utf-8"
+                    },
+                    body: JSON.stringify({
+                        action: action,
+                        orderId: String(orderId)
+                    })
+                });
+
+                button.textContent = "Checking update...";
+
+                await new Promise(resolve => setTimeout(resolve, 1800));
+
+                await loadOrders();
+
+                const updatedOrder = allOrders.find(order =>
+                    String(getOrderId(order) ?? "").trim() ===
+                    String(orderId).trim()
+                );
+
+                if (
+                    updatedOrder &&
+                    normalizeStatus(updatedOrder.Status) === expectedStatus
+                ) {
+                    alert(
+                        action === "start"
+                            ? "Order started successfully!"
+                            : "Order marked as completed!"
+                    );
+                } else {
+                    alert(
+                        "The status update could not be verified. " +
+                        "Please refresh and check the Google Sheet."
+                    );
+                }
+
+            } catch (error) {
+                console.error("Unable to update order status:", error);
+                alert("Could not update the order. Please try again.");
+
+            } finally {
+                if (button.isConnected) {
+                    button.disabled = false;
+                    button.textContent = originalText;
+                }
+            }
+        }
+
+
 
         async function loadOrders() {
             if (isLoading) return;
@@ -835,12 +1011,14 @@
 
         // Manual refresh.
         $("refreshButton").addEventListener("click", loadOrders);
+        loadOrders();
+        setInterval(loadOrders, 60000);
 
         // Initial load and automatic refresh every minute.
-        function initializeDashboard() {
-            loadOrders();
-            setInterval(loadOrders, 60000);
-        }
+        // function initializeDashboard() {
+        //     loadOrders();
+        //     setInterval(loadOrders, 60000);
+        // }
     </script>
 
 </body>
